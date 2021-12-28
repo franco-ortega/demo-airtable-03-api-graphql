@@ -8,6 +8,7 @@
 1. `npm install --save express-graphql`
 1. `npm install eslint --save-dev`
 1. `npm install express --save`
+1. `npm install dotenv --save`
 
 ### Commands
 1. `eslint --init`
