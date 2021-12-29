@@ -30,21 +30,50 @@ app.get('/', (req, res, next) => {
 
 // Add GraphQL with Express
 const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
+const {
+//   buildSchema, 
+  GraphQLSchema,
+  GraphQLObjectType,
+  GraphQLString
+} = require('graphql');
 
-const schema = buildSchema(`
-  type Query {
-      hello: String
-  }
-`);
+// const schema = buildSchema(`
+//   type Query {
+//       hello: String,
+//       goodbye: String
+//   }
+// `);
 
-const root = {
-  hello: () => 'Hello World!!'
+
+const testRoot = {
+  hello: () => 'Hello World!!',
+  goodbye: () => 'Adios Mundo...'
 };
+
+const TestQuery = new GraphQLObjectType({
+  name: 'Testing',
+  fields: () => ({
+    hello: {
+      type: GraphQLString,
+      resolve: testRoot.hello
+    },
+    goodbye: {
+      type: GraphQLString,
+      resolve: testRoot.goodbye
+    }
+  })
+});
+
+// const Mutation = 'mutation';
+
+const schema = new GraphQLSchema({
+  query: TestQuery,
+//   mutation: Mutation
+});
 
 app.use('/graphql', graphqlHTTP({
   schema,
-  rootValue: root,
+  //   rootValue: RootQuery,
   graphiql: true
 }));
 
