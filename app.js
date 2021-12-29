@@ -74,6 +74,11 @@ const RootQuery = new GraphQLObjectType({
       type: GraphQLString,
       description: 'Bloop Spot',
       resolve: () => 'BLOOP!!!'
+    },
+    bop: {
+      type: GraphQLString,
+      description: 'Bop Spot',
+      resolve: () => 'Bopping...'
     }
   })
 });
