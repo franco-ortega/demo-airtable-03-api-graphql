@@ -45,6 +45,7 @@ const {
 // `);
 
 
+// Test root and test query
 const testRoot = {
   hello: () => 'Hello World!!',
   goodbye: () => 'Adios Mundo...'
@@ -64,10 +65,24 @@ const TestQuery = new GraphQLObjectType({
   })
 });
 
+// Actual root and query
+const RootQuery = new GraphQLObjectType({
+  name: 'Query',
+  description: 'Root Query',
+  fields: () => ({
+    bloop: {
+      type: GraphQLString,
+      description: 'Bloop Spot',
+      resolve: () => 'BLOOP!!!'
+    }
+  })
+});
+
 // const Mutation = 'mutation';
 
 const schema = new GraphQLSchema({
-  query: TestQuery,
+//   query: TestQuery,
+  query: RootQuery,
 //   mutation: Mutation
 });
 
